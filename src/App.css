@@ -1,3 +1,20 @@
-.books,.mycart,.auth {
+.books,.mycart,.Profile {
   color: white
+}
+.card {
+  padding: 1em;
+  margin: auto
+}
+
+.user-profile ,.user-name{
+  color: black;
+  text-align: center;
+}
+
+.img-thumbnail,.user-name {
+  margin-top: 2em;
+  
+}
+.welcome {
+  text-align: center;
 }
