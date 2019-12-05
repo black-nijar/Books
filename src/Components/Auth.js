@@ -22,7 +22,8 @@ class Auth extends Component {
       const id = this.auth.currentUser.Ab.w3.Eea
       const name = this.auth.currentUser.Ab.w3.ig
       const image = this.auth.currentUser.Ab.w3.Paa
-      this.props.signIn(id, name, image)
+      const emailId = this.auth.currentUser.Ab.w3.U3
+      this.props.signIn(id, name, image, emailId)
     } else {
       this.props.signOut()
     }
