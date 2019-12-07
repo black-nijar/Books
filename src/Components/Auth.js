@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import Firebase  from '../Components/DBCONFIG'
 import { signIn, signOut } from '../actions/actions'
 
 class Auth extends Component {
+  constructor(props) {
+    super(props)
+    this.userDB = Firebase.database().ref('data').child('users')
+  }
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
         client_id:
-          '208738344058-tot0qo9sddkl100shpqlh68k4ccs4q7h.apps.googleusercontent.com',
+          '692346995595-qvprfdsdeji4ivmpp84cpoj8bikgukk8.apps.googleusercontent.com',
         scope: 'email'
       })
         .then(() => {
@@ -19,11 +24,17 @@ class Auth extends Component {
   }
   onAuthChange = isSignedIn => {
     if (isSignedIn) {
-      const id = this.auth.currentUser.Ab.w3.Eea
-      const name = this.auth.currentUser.Ab.w3.ig
+      const userId = this.auth.currentUser.Ab.w3.Eea
+      const userName = this.auth.currentUser.Ab.w3.ig
       const image = this.auth.currentUser.Ab.w3.Paa
-      const emailId = this.auth.currentUser.Ab.w3.U3
-      this.props.signIn(id, name, image, emailId)
+      const userEmail = this.auth.currentUser.Ab.w3.U3
+      const details = {
+        userId,
+        userName,
+        userEmail
+      }
+      this.userDB.push().set(details)
+      this.props.signIn(userId, userName, image, userEmail)
     } else {
       this.props.signOut()
     }

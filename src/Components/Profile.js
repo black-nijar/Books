@@ -9,20 +9,18 @@ class Profile extends Component {
       <div className='container'>
         <div className='user-profile'>
           <h2 className='profile'>Profile</h2>
-          {userImage ? 
+          {userImage ?
             (
-             <div>
-             <img className='img-thumbnail' src={userImage} alt='userimage'/>
-             <h4 className='user-name'>Name: {userName}</h4>
-          
-             </div>
-               )
+              <div>
+                <img className='img-thumbnail' src={userImage} alt='userimage' />
+                <h4 className='user-name'>Name: {userName}</h4>
+              </div>
+            )
             : (
               <div className='text-center'>
                 Sign In to see your profile
               </div>
             )}
-           
         </div>
       </div>
     )

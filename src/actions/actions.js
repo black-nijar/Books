@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, BOOKS } from './types';
+import { SIGN_IN, SIGN_OUT, BOOKS, TOGGLE, LIKES } from './types';
 
 export const signIn = (id,name,image, emailId) => {
   return {
@@ -18,11 +18,26 @@ export const signOut = () => {
   }
 }
 
-export const addBook = book => {
+export const addBook = (book,user) => {
   return {
     type: BOOKS,
     payload: {
-      book
+      book,
+      user
     }
+  }
+}
+
+export const toggle = id => {
+  return {
+    type: TOGGLE,
+    id
+  }
+}
+
+export const likes = likes => {
+  return {
+    type: LIKES,
+    likes
   }
 }

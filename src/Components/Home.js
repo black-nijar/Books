@@ -7,9 +7,8 @@ class Home extends Component {
     e.preventDefault();
     const bookName = this.book.value;
     console.log('book :',bookName);
-    this.props.addBook(bookName);
+    this.props.addBook(bookName,this.props.user);
     this.book.value = ''
-
   }
   render() {
     return (

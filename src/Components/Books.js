@@ -1,27 +1,46 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
+import { toggle } from '../actions/actions';
 
 class Books extends Component {
   render() {
     console.log('books :', this.props.books);
-    const { books} = this.props
-    const listBooks = books ? (
+    const { books } = this.props
+    const bookList = books ? (
       books.map(book => {
-        return(
+        return (
           <div key={book.id}>
-            {book.book}
+            <div className='card'>
+              <h5>Book name: {book.book}</h5>
+              <div>
+                <button
+                  className='btn btn-primary'
+                  onClick={() => this.props.toggle(book.id)}
+                >
+                  {
+                    book.isLiked ? 'Unlike' : 'Like'
+                  }
+                </button>
+              </div>
+            </div>
           </div>
         )
       })
-    ):(
-      <div>
-        No Books...
+    ) : (
+        <div>
+          No Books
       </div>
-    )
+      )
     return (
       <div className='container'>
         <h2>Books</h2>
-          {listBooks}
+        <button className='btn btn-outline-primary'>
+          <Link to='/addbook'>Add Book</Link>
+        </button>
+        <div className='book-list'>
+          {bookList}
+        </div>
       </div>
     )
   }
@@ -32,4 +51,4 @@ const mapStateToProps = state => {
     books: state.books
   }
 }
-export default connect(mapStateToProps)(Books)
+export default connect(mapStateToProps, { toggle })(Books)

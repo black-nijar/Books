@@ -13,8 +13,8 @@ class App extends Component {
       <BrowserRouter>
         <Navbar/><br/><br/>
         <Switch>
-          <Route path='/' exact component={Home}/>
-          <Route path='/books' component={Books}/>
+          <Route path='/addbook' component={Home}/>
+          <Route path='/' exact component={Books}/>
           <Route path='/mycart' component={Mycart}/>
           <Route path='/profile' component={Profile}/>
         </Switch>
