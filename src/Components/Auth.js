@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import Firebase  from '../Components/DBCONFIG'
+import DB_CONFIG from '../Components/DBCONFIG'
 import { signIn, signOut } from '../actions/actions'
 
 class Auth extends Component {
   constructor(props) {
     super(props)
-    this.userDB = Firebase.database().ref('data').child('users')
+    this.userDB = DB_CONFIG.child('users')
   }
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
         client_id:
-          '692346995595-qvprfdsdeji4ivmpp84cpoj8bikgukk8.apps.googleusercontent.com',
+          '670300519833-agi5bji2c3s0l9061jft2p0apv20hhv1.apps.googleusercontent.com',
         scope: 'email'
       })
         .then(() => {
@@ -33,7 +33,7 @@ class Auth extends Component {
         userName,
         userEmail
       }
-      this.userDB.push().set(details)
+      this.userDB.child(userId).set(details)
       this.props.signIn(userId, userName, image, userEmail)
     } else {
       this.props.signOut()

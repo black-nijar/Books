@@ -1,27 +1,50 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { toggle } from '../actions/actions';
+import DB_CONFIG from '../Components/DBCONFIG'
+import { addDetails } from '../actions/actions'
 
 class Books extends Component {
+
+  componentDidMount() {
+    DB_CONFIG.on('value', snap => {
+      const books = snap.val().books
+      const users = snap.val().users
+      this.props.addDetails(users, books)
+    })
+  }
+  handleSubmit = () => {
+    this.props.history.push('/addbook')
+  }
+
   render() {
-    console.log('books :', this.props.books);
-    const { books } = this.props
-    const bookList = books ? (
+    const { data: { users, books } } = this.props
+    const List = books ? (
       books.map(book => {
+        const isLiked = false
+        const authorName = users[book.bookAuthor].userName
         return (
-          <div key={book.id}>
+          <div key={book.bookId}>
             <div className='card'>
-              <h5>Book name: {book.book}</h5>
+              <h4>Book name  : {book.bookName}</h4>
+              <h5>Created by : {authorName}</h5>
               <div>
-                <button
-                  className='btn btn-primary'
-                  onClick={() => this.props.toggle(book.id)}
-                >
-                  {
-                    book.isLiked ? 'Unlike' : 'Like'
-                  }
-                </button>
+                {
+                  isLiked ? (
+                    <div>
+                      <button
+                        className='btn btn-outline-primary'
+                        onClick={this.handleUpdate}
+                      >
+                        Liked
+                    </button>
+                    </div>
+                  ) : (<button
+                    className='btn btn-outline-primary'
+                    onClick={() => { console.log('Liked') }}
+                  >
+                    Like
+                </button>)
+                }
               </div>
             </div>
           </div>
@@ -29,17 +52,21 @@ class Books extends Component {
       })
     ) : (
         <div>
-          No Books
+          No Books...
       </div>
       )
     return (
       <div className='container'>
-        <h2>Books</h2>
-        <button className='btn btn-outline-primary'>
-          <Link to='/addbook'>Add Book</Link>
-        </button>
+        <div className='header'>
+          <span className='book-header'>Books</span>
+          <button className='btn btn-outline-primary'
+            onClick={this.handleSubmit}
+          >
+            Add Book
+          </button>
+        </div>
         <div className='book-list'>
-          {bookList}
+          {List}
         </div>
       </div>
     )
@@ -48,7 +75,7 @@ class Books extends Component {
 
 const mapStateToProps = state => {
   return {
-    books: state.books
+    data: state.data
   }
 }
-export default connect(mapStateToProps, { toggle })(Books)
+export default connect(mapStateToProps, { addDetails })(Books)

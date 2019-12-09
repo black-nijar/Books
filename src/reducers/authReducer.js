@@ -12,13 +12,12 @@ export const authReducer = (state = initState, action) => {
   switch (action.type) {
     case SIGN_IN:
      const { id ,name, image, emailId } = action.payload
-      console.log('Authhhhh',id,name,image)
       return {
         isSignedIn: true,
         userId: id,
         userName: name,
         userImage: image,
-        emailId: emailId
+        userEmail: emailId
       }
     case SIGN_OUT:
       return {

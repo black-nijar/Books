@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 class Profile extends Component {
   render() {
-    console.log('User:', this.props.user)
     const { userName, userImage } = this.props.user
     return (
       <div className='container'>
         <div className='user-profile'>
           <h2 className='profile'>Profile</h2>
-          {userImage ?
+          {
+            userName ?
             (
               <div>
                 <img className='img-thumbnail' src={userImage} alt='userimage' />
