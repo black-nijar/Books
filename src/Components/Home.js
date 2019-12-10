@@ -11,15 +11,15 @@ class Home extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const bookName = this.book.value;
-    const id = new Date().getTime()
+    const bookId = new Date().getTime()
     const { userId } = this.props.user
-    const authorId = userId
+    const bookAuthor = userId
     const bookDetail = {
-      id,
+      bookId,
       bookName,
-      authorId
+      bookAuthor,
     }
-    this.bookDB.child(id).set(bookDetail)
+    this.bookDB.child(bookId).set(bookDetail)
     this.book.value = ''
     this.props.history.push('/')
   }

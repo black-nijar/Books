@@ -9,13 +9,15 @@ export const bookReducer = (state = initState, action) => {
       {
         var books = [];
         for (let key in action.books) {
-          const bookId = action.books[key].id
+          const bookId = action.books[key].bookId
           const bookName = action.books[key].bookName
-          const bookAuthor = action.books[key].authorId
+          const bookAuthor = action.books[key].bookAuthor
+          const likes = action.books[key].likes
           books.push({
             bookId,
             bookName,
-            bookAuthor
+            bookAuthor,
+            likes
           })
         }
         return {
