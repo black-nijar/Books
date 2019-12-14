@@ -20,12 +20,13 @@ class Books extends Component {
   }
   handleUpdate = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, likes = [] } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes = [] } = book
     likes.push(userId)
     const bookDetail = {
       bookId,
       bookName,
       bookAuthor,
+      bookImageurl,
       likes
     }
     this.bookDB.child(bookId).set(bookDetail)
@@ -33,12 +34,13 @@ class Books extends Component {
   }
   handleUnlikeupDate = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, likes } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes } = book
     const Unlikes = likes.filter(like => like !== userId)
     const bookDetail = {
       bookId,
       bookName,
       bookAuthor,
+      bookImageurl,
       likes: Unlikes
     }
     this.bookDB.child(bookId).set(bookDetail)
@@ -55,6 +57,11 @@ class Books extends Component {
         return (
           <div key={book.bookId}>
             <div className='card'>
+              <img
+                className='book-image'
+                alt={book.bookName}
+                src={book.bookImageurl}
+              />
               <h5>Book name  : {book.bookName}</h5>
               <h5>Created by : {authorName}</h5>
               <hr />
@@ -63,6 +70,7 @@ class Books extends Component {
                   !isLiked ? (
                     <div>
                       <button
+                        disabled={!userId ? true : false}
                         className='btn btn-outline-primary'
                         onClick={() => this.handleUpdate(book)}
                       >

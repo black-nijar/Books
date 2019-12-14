@@ -1,4 +1,4 @@
-import { DATA } from "../actions/types";
+import { DATA, IMAGE_UPLOAD, IMAGE_URL } from "../actions/types";
 
 const initState = []
 
@@ -12,11 +12,13 @@ export const bookReducer = (state = initState, action) => {
           const bookId = action.books[key].bookId
           const bookName = action.books[key].bookName
           const bookAuthor = action.books[key].bookAuthor
+          const bookImageurl = action.books[key].bookImageurl
           const likes = action.books[key].likes
           books.push({
             bookId,
             bookName,
             bookAuthor,
+            bookImageurl,
             likes
           })
         }
@@ -25,6 +27,11 @@ export const bookReducer = (state = initState, action) => {
           'books': books
         }
       }
+    case IMAGE_UPLOAD:
+      return { 'image': action.image }
+
+    case IMAGE_URL:
+      return { 'url': action.url }
 
     default:
       return state;

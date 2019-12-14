@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+
 class Profile extends Component {
   render() {
     const { userName, userImage, userEmail } = this.props.user
@@ -9,7 +10,7 @@ class Profile extends Component {
         <div className='user-profile'>
           <div className='card'>
             <h2 className='profile'>Profile</h2>
-            <hr/>
+            <hr />
             {
               userName ?
                 (
@@ -24,10 +25,9 @@ class Profile extends Component {
                 : (
                   <div className='text-center'>
                     Sign In to see your profile
-                </div>
-                )
-            }
-
+                  </div>
+               )
+             }
           </div>
         </div>
       </div>

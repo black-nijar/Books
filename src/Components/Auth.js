@@ -50,19 +50,23 @@ class Auth extends Component {
       return null
     } else if (this.props.isSignedIn) {
       return (
-        <button className='btn'
-          onClick={this.onSignOut}
-        >
-          Sign Out
-        </button>
+        <div className='google-button'>
+          <button className='btn'
+            onClick={this.onSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
       )
     } else {
       return (
-        <button className='btn'
-          onClick={this.onSignIn}
-        >
-          Sign in with Google
-        </button>
+        <div className='google-button'>
+          <button className='btn'
+            onClick={this.onSignIn}
+          >
+            Sign in with Google
+          </button>
+        </div>
       )
     }
   }

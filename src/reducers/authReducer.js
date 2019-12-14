@@ -11,8 +11,9 @@ const initState = {
 export const authReducer = (state = initState, action) => {
   switch (action.type) {
     case SIGN_IN:
-     const { id ,name, image, emailId } = action.payload
+      const { id, name, image, emailId } = action.payload
       return {
+        ...state,
         isSignedIn: true,
         userId: id,
         userName: name,
@@ -21,7 +22,6 @@ export const authReducer = (state = initState, action) => {
       }
     case SIGN_OUT:
       return {
-        ...state,
         isSignedIn: false
       }
     default:
