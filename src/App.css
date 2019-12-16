@@ -21,9 +21,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
-  grid-auto-rows: 150px;
+  grid-auto-rows: 190px;
   grid-row-gap: 350px;
   margin-bottom: 30rem;
+  font-size: 15px;
 }
 .header {
   margin-bottom: 10px;
@@ -79,4 +80,10 @@
 }
 .my-books {
   margin-top: 10px;
+}
+.book-header{
+  color: rgb(11, 24, 36);  
+}
+.book-sell {
+  margin-left: 40px;
 }

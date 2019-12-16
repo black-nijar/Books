@@ -12,6 +12,7 @@ class Home extends Component {
   handleImageChange = e => {
     const image = e.target.files[0]
     this.props.addImage(image)
+    console.log('Image :', image)
   }
   handleImageUpload = () => {
     const { image } = this.props
@@ -91,6 +92,7 @@ class Home extends Component {
     )
   }
 }
+
 const mapStateToProps = state => {
   return {
     user: state.auth,

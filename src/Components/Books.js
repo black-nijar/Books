@@ -20,32 +20,65 @@ class Books extends Component {
   }
   handleUpdate = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, likes = [] } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes = [], purchasedBy=[] } = book
     likes.push(userId)
     const bookDetail = {
       bookId,
       bookName,
       bookAuthor,
       bookImageurl,
-      likes
+      likes,
+      purchasedBy
     }
     this.bookDB.child(bookId).set(bookDetail)
     this.updateBooks()
   }
   handleUnlikeupDate = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, likes } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes=[], purchasedBy=[] } = book
     const Unlikes = likes.filter(like => like !== userId)
     const bookDetail = {
       bookId,
       bookName,
       bookAuthor,
       bookImageurl,
-      likes: Unlikes
+      likes: Unlikes,
+      purchasedBy
     }
     this.bookDB.child(bookId).set(bookDetail)
     this.updateBooks()
   }
+  handleBuy = book => {
+    const { user: { userId } } = this.props
+    const { bookId, bookName, bookAuthor, bookImageurl, purchasedBy = [],likes=[] } = book
+    purchasedBy.push(userId)
+    let bookDetail = {
+      bookId,
+      bookName,
+      bookAuthor,
+      bookImageurl,
+      purchasedBy,
+      likes
+    }
+    this.bookDB.child(bookId).set(bookDetail)
+    this.updateBooks()
+  }
+  handleReturn = book => {
+    const { user: { userId } } = this.props
+    const { bookId, bookName, bookAuthor, bookImageurl, purchasedBy = [], likes=[] } = book
+    const Return = purchasedBy.filter(purchasedBy => purchasedBy !== userId)
+    let bookDetail = {
+      bookId,
+      bookName,
+      bookAuthor,
+      bookImageurl,
+      purchasedBy: Return,
+      likes
+    }
+    this.bookDB.child(bookId).set(bookDetail)
+    this.updateBooks()
+  }
+
   render() {
     const { data: { users, books } } = this.props
     const { user: { userId } } = this.props
@@ -53,6 +86,7 @@ class Books extends Component {
       books.map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const isLiked = book.likes ? book.likes.includes(userId) : false
+        const isBuy = book.purchasedBy ? book.purchasedBy.includes(userId) : false
         const authorName = users[book.bookAuthor].userName
         return (
           <div key={book.bookId}>
@@ -65,7 +99,7 @@ class Books extends Component {
               <h5>Book name  : {book.bookName}</h5>
               <h5>Created by : {authorName}</h5>
               <hr />
-              <div>
+              <div className='btn-group'>
                 {
                   !isLiked ? (
                     <div>
@@ -90,6 +124,29 @@ class Books extends Component {
                       </div>
                     )
                 }
+                <div className='book-sell'>
+                 {
+                   !isBuy ? (
+                     <div>
+                       <button
+                          className='btn btn-outline-primary'
+                          onClick={() => this.handleBuy(book)}
+                       >
+                          Buy
+                       </button>
+                     </div>
+                   ):(
+                     <div>
+                       <button
+                          onClick={() => this.handleReturn(book)}
+                          className='btn btn-outline-warning'
+                       >
+                         Return
+                       </button>
+                     </div>
+                   )
+                 }
+                </div>
               </div>
             </div>
           </div>

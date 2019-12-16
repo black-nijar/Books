@@ -105,11 +105,19 @@ class Mycart extends Component {
       )
     return (
       <div className='container'>
-        <h3>My books</h3>
-        <div className='my-book-list'>
-          <div className='row'>
-            <div className='col-md-6 col-lg-5' >
-              {List}
+        <div className='card-header' id='headingOne' style={{ position: 'sticky' }}>
+          <h5 className="mb-0">
+            <button className='btn btn-link' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+              <h3 className='book-header'>My books</h3>
+            </button>
+          </h5>
+        </div>
+        <div id='collapseOne' className='collapse' aria-labelledby='headingOne' data-parent='#accordion'>
+          <div className='my-book-list'>
+            <div className='row'>
+              <div className='col-md-6 col-lg-5' >
+                {List}
+              </div>
             </div>
           </div>
         </div>

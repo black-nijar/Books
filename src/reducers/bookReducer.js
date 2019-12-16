@@ -14,12 +14,14 @@ export const bookReducer = (state = initState, action) => {
           const bookAuthor = action.books[key].bookAuthor
           const bookImageurl = action.books[key].bookImageurl
           const likes = action.books[key].likes
+          const purchasedBy = action.books[key].purchasedBy
           books.push({
             bookId,
             bookName,
             bookAuthor,
             bookImageurl,
-            likes
+            likes,
+            purchasedBy
           })
         }
         return {
