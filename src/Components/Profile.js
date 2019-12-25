@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 class Profile extends Component {
   render() {
-    const { userName, userImage, userEmail } = this.props.user
+    const {user: { userName, userImage, userEmail }} = this.props
     return (
       <div className='container'>
         <div className='user-profile'>

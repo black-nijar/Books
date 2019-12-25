@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import DB_CONFIG from '../Components/DBCONFIG'
 import { signIn, signOut } from '../actions/actions'
 
 class Auth extends Component {
-  constructor(props) {
-    super(props)
-    this.userDB = DB_CONFIG.child('users')
-  }
+  
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
@@ -28,12 +24,6 @@ class Auth extends Component {
       const userName = this.auth.currentUser.Ab.w3.ig
       const image = this.auth.currentUser.Ab.w3.Paa
       const userEmail = this.auth.currentUser.Ab.w3.U3
-      const details = {
-        userId,
-        userName,
-        userEmail
-      }
-      this.userDB.child(userId).set(details)
       this.props.signIn(userId, userName, image, userEmail)
     } else {
       this.props.signOut()
@@ -46,9 +36,10 @@ class Auth extends Component {
     this.auth.signOut()
   }
   renderButton = () => {
-    if (this.props.isSignedIn === null) {
+    const {user: { isSignedIn }} = this.props
+    if (isSignedIn === null) {
       return null
-    } else if (this.props.isSignedIn) {
+    } else if (isSignedIn) {
       return (
         <div className='google-button'>
           <button className='btn'
@@ -81,7 +72,7 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
   return {
-    isSignedIn: state.auth.isSignedIn
+    user: state.auth
   }
 }
 export default connect(mapStateToProps, { signIn, signOut })(Auth)

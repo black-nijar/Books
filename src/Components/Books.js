@@ -7,6 +7,7 @@ class Books extends Component {
   constructor(props) {
     super(props)
     this.bookDB = DB_CONFIG.child('books')
+    this.userDB = DB_CONFIG.child('users')
   }
   componentDidMount() {
     this.updateBooks()
@@ -18,7 +19,15 @@ class Books extends Component {
       this.props.addDetails(users, books)
     })
   }
+  handleUser = () => {
+    const { user: { userId, userName, userEmail }} = this.props
+    const userDetail = {
+      userId, userEmail, userName
+    }
+    this.userDB.child(userId).set(userDetail)
+  }
   handleUpdate = book => {
+    this.handleUser()
     const { user: { userId } } = this.props
     const { bookId, bookName, bookAuthor, bookImageurl, likes = [], purchasedBy=[] } = book
     likes.push(userId)
@@ -34,15 +43,16 @@ class Books extends Component {
     this.updateBooks()
   }
   handleUnlikeupDate = book => {
+    this.handleUser()
     const { user: { userId } } = this.props
     const { bookId, bookName, bookAuthor, bookImageurl, likes=[], purchasedBy=[] } = book
-    const Unlikes = likes.filter(like => like !== userId)
+    const unLike = likes.filter(like => like !== userId)
     const bookDetail = {
       bookId,
       bookName,
       bookAuthor,
       bookImageurl,
-      likes: Unlikes,
+      likes: unLike,
       purchasedBy
     }
     this.bookDB.child(bookId).set(bookDetail)
@@ -50,30 +60,14 @@ class Books extends Component {
   }
   handleBuy = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, purchasedBy = [],likes=[] } = book
-    purchasedBy.push(userId)
+    const { bookId, bookName, bookAuthor, bookImageurl,likes = [] } = book
     let bookDetail = {
       bookId,
       bookName,
       bookAuthor,
       bookImageurl,
-      purchasedBy,
-      likes
-    }
-    this.bookDB.child(bookId).set(bookDetail)
-    this.updateBooks()
-  }
-  handleReturn = book => {
-    const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, purchasedBy = [], likes=[] } = book
-    const Return = purchasedBy.filter(purchasedBy => purchasedBy !== userId)
-    let bookDetail = {
-      bookId,
-      bookName,
-      bookAuthor,
-      bookImageurl,
-      purchasedBy: Return,
-      likes
+      likes,
+      purchasedBy: userId
     }
     this.bookDB.child(bookId).set(bookDetail)
     this.updateBooks()
@@ -97,7 +91,7 @@ class Books extends Component {
                 src={book.bookImageurl}
               />
               <h5>Book name  : {book.bookName}</h5>
-              <h5>Created by : {authorName}</h5>
+              <h5>Author name : {authorName} </h5>
               <hr />
               <div className='btn-group'>
                 {
