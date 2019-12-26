@@ -12,7 +12,7 @@ class Navbar extends Component {
             <ul className='nav'>
               <Link to='/mycart' className='mycart'>My Cart</Link>
               <Link to='/profile' className='Profile'>Profile</Link>
-              <Auth/>
+              <Auth />
             </ul>
           </div>
         </nav>

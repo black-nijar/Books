@@ -69,28 +69,28 @@ class MyBooks extends Component {
                 <hr />
                 <div>
                   {
-                    !isLiked ? (
+                   !isLiked ? (
+                    <div>
+                      <button
+                        disabled={!userId ? true : false}
+                        className='btn btn-outline-primary'
+                        onClick={() => this.handleUpdate(book)}
+                      >
+                        Like
+                      </button>
+                      <span className='book-likes'>{bookLikes}</span>
+                    </div>
+                  ) : (
                       <div>
                         <button
-                          disabled={!userId ? true : false}
                           className='btn btn-outline-primary'
-                          onClick={() => this.handleUpdate(book)}
+                          onClick={() => this.handleUnlikeupDate(book)}
                         >
-                          Like
+                          Unlike
                         </button>
                         <span className='book-likes'>{bookLikes}</span>
                       </div>
-                    ) : (
-                        <div>
-                          <button
-                            className='btn btn-outline-primary'
-                            onClick={() => this.handleUnlikeupDate(book)}
-                          >
-                            Unlike
-                          </button>
-                          <span className='book-likes'>{bookLikes}</span>
-                        </div>
-                      )
+                    )
                   }
                 </div>
               </div>

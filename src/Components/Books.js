@@ -20,7 +20,7 @@ class Books extends Component {
     })
   }
   handleUser = () => {
-    const { user: { userId, userName, userEmail }} = this.props
+    const { user: { userId, userName, userEmail } } = this.props
     const userDetail = {
       userId, userEmail, userName
     }
@@ -29,7 +29,7 @@ class Books extends Component {
   handleUpdate = book => {
     this.handleUser()
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, likes = [], purchasedBy=[] } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes = [], purchasedBy = [] } = book
     likes.push(userId)
     const bookDetail = {
       bookId,
@@ -45,7 +45,7 @@ class Books extends Component {
   handleUnlikeupDate = book => {
     this.handleUser()
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl, likes=[], purchasedBy=[] } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes = [], purchasedBy = [] } = book
     const unLike = likes.filter(like => like !== userId)
     const bookDetail = {
       bookId,
@@ -60,7 +60,7 @@ class Books extends Component {
   }
   handleBuy = book => {
     const { user: { userId } } = this.props
-    const { bookId, bookName, bookAuthor, bookImageurl,likes = [] } = book
+    const { bookId, bookName, bookAuthor, bookImageurl, likes = [] } = book
     let bookDetail = {
       bookId,
       bookName,
@@ -80,7 +80,7 @@ class Books extends Component {
       books.map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const isLiked = book.likes ? book.likes.includes(userId) : false
-        const isBuy = book.purchasedBy ? book.purchasedBy.includes(userId) : false
+        const isBuy = book.purchasedBy ? book.purchasedBy : null
         const authorName = users[book.bookAuthor].userName
         return (
           <div key={book.bookId}>
@@ -103,7 +103,7 @@ class Books extends Component {
                         onClick={() => this.handleUpdate(book)}
                       >
                         Like
-                    </button>
+                      </button>
                       <span className='book-likes'>{bookLikes}</span>
                     </div>
                   ) : (
@@ -119,27 +119,36 @@ class Books extends Component {
                     )
                 }
                 <div className='book-sell'>
-                 {
-                   !isBuy ? (
-                     <div>
-                       <button
-                          className='btn btn-outline-primary'
-                          onClick={() => this.handleBuy(book)}
-                       >
-                          Buy
-                       </button>
-                     </div>
-                   ):(
-                     <div>
-                       <button
-                          onClick={() => this.handleReturn(book)}
-                          className='btn btn-outline-warning'
-                       >
-                         Return
-                       </button>
-                     </div>
-                   )
-                 }
+                  <div>
+                    {
+                      userId !== book.bookAuthor ? (
+                        <div>
+                          {!isBuy ? (
+                            <div>
+                              <button
+                                disabled={!userId ? true : false}
+                                className='btn btn-outline-primary'
+                                onClick={() => this.handleBuy(book)}
+                              >
+                                Buy
+                              </button>
+                            </div>
+                          ) : (
+                              <div>
+                                <button
+                                  disabled={true}
+                                  className='btn btn-secondary'
+                                >
+                                  Sold
+                                </button>
+                              </div>
+                            )}
+                        </div>
+                      ) : (
+                          <div></div>
+                        )
+                    }
+                  </div>
                 </div>
               </div>
             </div>
@@ -148,7 +157,7 @@ class Books extends Component {
       })
     ) : (
         <div>
-          No Books...
+          Loading Books...
       </div>
       )
     return (

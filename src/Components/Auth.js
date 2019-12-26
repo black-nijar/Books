@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions/actions'
 
 class Auth extends Component {
-  
+
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
@@ -36,7 +36,7 @@ class Auth extends Component {
     this.auth.signOut()
   }
   renderButton = () => {
-    const {user: { isSignedIn }} = this.props
+    const { user: { isSignedIn } } = this.props
     if (isSignedIn === null) {
       return null
     } else if (isSignedIn) {

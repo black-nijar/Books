@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 class Profile extends Component {
   render() {
-    const {user: { userName, userImage, userEmail }} = this.props
+    const { user: { userName, userImage, userEmail } } = this.props
     return (
       <div className='container'>
         <div className='user-profile'>
@@ -26,8 +26,8 @@ class Profile extends Component {
                   <div className='text-center'>
                     Sign In to see your profile
                   </div>
-               )
-             }
+                )
+            }
           </div>
         </div>
       </div>

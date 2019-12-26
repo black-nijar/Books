@@ -25,7 +25,7 @@ class Home extends Component {
           .getDownloadURL()
           .then(url => {
             this.props.addImageUrl(url)
-        })
+          })
       }
     )
   }
