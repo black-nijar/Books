@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, DATA, IMAGE_UPLOAD, IMAGE_URL } from './types';
+import { SIGN_IN, SIGN_OUT, DATA, IMAGE_UPLOAD, IMAGE_URL, INPUT_NAME } from './types';
 
 export const signIn = (id, name, image, emailId) => {
   return {
@@ -35,5 +35,12 @@ export const addImageUrl = url => {
   return {
     type: IMAGE_URL,
     url
+  }
+}
+
+export const handleName = name => {
+  return {
+    type: INPUT_NAME,
+    name
   }
 }

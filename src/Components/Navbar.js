@@ -11,7 +11,7 @@ class Navbar extends Component {
             <Link to='/' className='navbar-brand'>Books</Link>
             <ul className='nav'>
               <Link to='/mycart' className='mycart'>My Cart</Link>
-              <Link to='/profile' className='Profile'>Profile</Link>
+              <Link to='/userprofile' className='Profile'>Profile</Link>
               <Auth />
             </ul>
           </div>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { addDetails } from '../actions/actions'
 
 class PurchasedBooks extends Component {
-  
+
   render() {
     const { data: { users, books } } = this.props
     const { user: { userId } } = this.props

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import DB_CONFIG from '../Components/DBCONFIG'
-import { addImage, addImageUrl } from '../actions/actions'
+import { addImage, addImageUrl, handleName } from '../actions/actions'
 import { storage } from '../Components/DBCONFIG'
 
 class Home extends Component {
@@ -50,7 +50,14 @@ class Home extends Component {
       this.props.history.push('/')
     }
   }
+  handleValidateName = e => {
+    let value = e.target.value
+    let nameError = value.length > 0 ? null :`*You must enter book name`
+    this.props.handleName(nameError)
+  }
   render() {
+    const { inputName } = this.props
+    const { bookImageurl } = this.props
     return (
       <div className='ui container'>
         <h2 className='welcome'>Welcome {this.props.user.userName}</h2>
@@ -59,11 +66,18 @@ class Home extends Component {
             <div>
               <label htmlFor='book-name'>Book name</label>
               <input
-                className='form-control'
+                className={`form-control ${this.props.inputName ? 'is-invalid' : ''}`}
                 placeholder='Book name'
+                type='text'
                 ref={input => this.book = input}
+                onChange={this.handleValidateName}
+                onBlur={this.handleValidateName}
                 required
-              /><br />
+              />
+              <div className='invalid-feedback'>
+                {this.props.inputName}
+              </div>
+              <br />
             </div>
             <div>
               <label htmlFor='book-image'>Book image</label>
@@ -79,10 +93,13 @@ class Home extends Component {
               className='btn btn-info'
               onClick={this.handleImageUpload}
             >
-              {this.props.bookImageurl ? 'Uploaded' : 'Upload'}
+              { bookImageurl ? 'Uploaded' : 'Upload'}
             </button>
             <div className='submit-button'>
-              <button className='btn btn-outline-info' type='submit'>
+              <button 
+                disabled={!inputName && !bookImageurl ? true : false }
+                className='btn btn-outline-info' 
+                type='submit'>
                 Publish
               </button>
             </div>
@@ -97,7 +114,8 @@ const mapStateToProps = state => {
   return {
     user: state.auth,
     image: state.data.image,
-    bookImageurl: state.data.url
+    bookImageurl: state.data.url,
+    inputName: state.data.name
   }
 }
-export default connect(mapStateToProps, { addImage, addImageUrl })(Home)
+export default connect(mapStateToProps, { addImage, addImageUrl, handleName })(Home)
