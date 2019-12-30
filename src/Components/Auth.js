@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions/actions'
+import { withRouter } from 'react-router-dom'
 
 class Auth extends Component {
-
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
@@ -25,8 +25,10 @@ class Auth extends Component {
       const image = this.auth.currentUser.Ab.w3.Paa
       const userEmail = this.auth.currentUser.Ab.w3.U3
       this.props.signIn(userId, userName, image, userEmail)
+      this.props.history.push('/books')
     } else {
       this.props.signOut()
+      this.props.history.push('/')
     }
   }
   onSignIn = () => {
@@ -42,7 +44,8 @@ class Auth extends Component {
     } else if (isSignedIn) {
       return (
         <div className='google-button'>
-          <button className='btn'
+          <button 
+            className='button-google'
             onClick={this.onSignOut}
           >
             Sign Out
@@ -52,7 +55,8 @@ class Auth extends Component {
     } else {
       return (
         <div className='google-button'>
-          <button className='btn'
+          <button 
+            className='button-google'
             onClick={this.onSignIn}
           >
             Sign in with Google
@@ -75,4 +79,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default connect(mapStateToProps, { signIn, signOut })(Auth)
+export default withRouter(connect(mapStateToProps, { signIn, signOut })(Auth))

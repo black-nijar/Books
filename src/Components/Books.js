@@ -83,7 +83,7 @@ class Books extends Component {
         const isBuy = book.purchasedBy ? book.purchasedBy : null
         const authorName = users[book.bookAuthor].userName
         return (
-          <div key={book.bookId}>
+          <div  key={book.bookId}>
             <div className='card'>
               <img
                 className='book-image'

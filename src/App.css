@@ -69,7 +69,7 @@
 .mycart {
   margin-right: 2em;
 }
-.book-image {
+.book-image{
   width: auto;
   height: 300px;
   margin: 10px;
@@ -86,4 +86,12 @@
 }
 .book-sell {
   margin-left: 40px;
+}
+.button-google {
+  border-radius: 5px;
+  border-color: cornflowerblue
+}
+.home-page {
+  margin: auto;
+  text-align: center
 }

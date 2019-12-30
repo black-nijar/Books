@@ -13,7 +13,7 @@ export const authReducer = (state = initState, action) => {
     case SIGN_IN:
       const { id, name, image, emailId } = action.payload
       return {
-        ...state,
+       ...state,
         isSignedIn: true,
         userId: id,
         userName: name,
