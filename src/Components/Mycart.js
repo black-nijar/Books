@@ -7,10 +7,8 @@ class Mycart extends Component {
     return (
       <div className='container'>
         <div className='accordion' id='accordion'>
-          <div className='btn-group'>
-            <MyBooks/>
-            <PurchasedBooks/>
-          </div>
+          <MyBooks/>
+          <PurchasedBooks/>
         </div>
       </div>
     )
