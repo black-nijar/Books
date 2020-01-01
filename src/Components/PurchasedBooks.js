@@ -7,8 +7,8 @@ class PurchasedBooks extends Component {
   render() {
     const { data: { users, books } } = this.props
     const { user: { userId } } = this.props
-    const bookList = books ? books.filter(book => book.purchasedBy === userId) : null
-    const List = bookList ? (
+    const bookList = books ? books.filter(book => book.purchasedBy === userId) : 0
+    const List = bookList.length ? (
       bookList.map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const authorName = users[book.bookAuthor].userName

@@ -54,7 +54,7 @@ class Auth extends Component {
       )
     } else {
       return (
-        <div className='google-button'>
+        <div className='shadow-sm'>
           <button 
             className='button-google'
             onClick={this.onSignIn}
@@ -67,7 +67,7 @@ class Auth extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='shadow-sm'>
         {this.renderButton()}
       </div>
     )

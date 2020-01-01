@@ -49,8 +49,8 @@ class MyBooks extends Component {
   render() {
     const { data: { users, books } } = this.props
     const { user: { userId } } = this.props
-    const myBooks = books ? books.filter(book => book.bookAuthor === userId) : null
-    const List = myBooks ? (
+    const myBooks = books ? books.filter(book => book.bookAuthor === userId) : 0
+    const List = myBooks.length ? (
       myBooks.map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const isLiked = book.likes ? book.likes.includes(userId) : false
