@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import DB_CONFIG from '../Components/DBCONFIG'
-import { addImage, addImageUrl, handleName } from '../actions/actions'
+import { addImage, handleName } from '../actions/actions'
 import { storage } from '../Components/DBCONFIG'
 
 class Home extends Component {
@@ -23,20 +23,20 @@ class Home extends Component {
         storage.ref('images').child(image.name)
           .getDownloadURL()
           .then(url => {
-            this.props.addImageUrl(url)
+            this.handleSubmit(url)
           })
       }
     )
   }
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (url) => {
     const { userId } = this.props.user
-    const { bookImageurl } = this.props
+    const { emptyName } = this.props
+    const bookImageurl = url
     const bookName = this.book.value;
     const bookId = new Date().getTime()
     const bookAuthor = userId
-    if (bookAuthor === null || undefined) {
-      alert(`You have to SignIn before publish`)
+    if (bookAuthor === null || undefined || emptyName === '') {
+      alert(`Check your details`)
     } else {
       const bookDetail = {
         bookId,
@@ -50,13 +50,13 @@ class Home extends Component {
     }
   }
   handleValidateName = e => {
-    let value = e.target.value
+    e.preventDefault();
+    var value = e.target.value
     let nameError = value.length > 0 ? null :`*You must enter book name`
     this.props.handleName(nameError)
   }
   render() {
-    const { inputName } = this.props
-    const { bookImageurl } = this.props
+   const { inputName } = this.props
     return (
       <div className='ui container'>
         <h2 className='welcome'>Welcome {this.props.user.userName}</h2>
@@ -65,7 +65,7 @@ class Home extends Component {
             <div>
               <label htmlFor='book-name'>Book name</label>
               <input
-                className={`form-control ${this.props.inputName ? 'is-invalid' : ''}`}
+                className={`form-control ${inputName ? 'is-invalid' : ''}`}
                 placeholder='Book name'
                 type='text'
                 ref={input => this.book = input}
@@ -87,21 +87,13 @@ class Home extends Component {
               />
             </div><br />
             <button
-              disabled={!this.props.image ? true : false}
+              disabled={!this.props.image && !this.props.emptyName ? true : false}
               type='button'
               className='btn btn-info'
               onClick={this.handleImageUpload}
             >
-              { bookImageurl ? 'Uploaded' : 'Upload'}
+              Publish
             </button>
-            <div className='submit-button'>
-              <button 
-                disabled={!inputName && !bookImageurl ? true : false }
-                className='btn btn-outline-info' 
-                type='submit'>
-                Publish
-              </button>
-            </div>
           </div>
         </form>
       </div>
@@ -113,8 +105,8 @@ const mapStateToProps = state => {
   return {
     user: state.auth,
     image: state.data.image,
-    bookImageurl: state.data.url,
+    emptyName: state.data.emptyName,
     inputName: state.data.name
   }
 }
-export default connect(mapStateToProps, { addImage, addImageUrl, handleName })(Home)
+export default connect(mapStateToProps, { addImage, handleName })(Home)

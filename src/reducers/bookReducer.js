@@ -30,10 +30,11 @@ export const bookReducer = (state = initState, action) => {
         }
       }
     case IMAGE_UPLOAD:
-      return { 'image': action.image }
-
-    case IMAGE_URL:
-      return { 'url': action.url }
+      const { image} = action
+      return {
+        ...state,
+         'image': image
+         }
 
     case INPUT_NAME:
       return { 'name': action.name }
