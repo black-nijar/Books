@@ -51,7 +51,7 @@ class MyBooks extends Component {
     const { user: { userId } } = this.props
     const myBooks = books ? books.filter(book => book.bookAuthor === userId) : 0
     const List = myBooks.length ? (
-      myBooks.map(book => {
+      myBooks.reverse().map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const isLiked = book.likes ? book.likes.includes(userId) : false
         const authorName = users[book.bookAuthor].userName

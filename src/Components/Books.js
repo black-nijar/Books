@@ -77,7 +77,7 @@ class Books extends Component {
     const { data: { users, books } } = this.props
     const { user: { userId } } = this.props
     const List = books ? (
-      books.map(book => {
+      books.reverse().map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const isLiked = book.likes ? book.likes.includes(userId) : false
         const isBuy = book.purchasedBy ? book.purchasedBy : null

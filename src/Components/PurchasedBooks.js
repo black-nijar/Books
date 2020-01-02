@@ -9,7 +9,7 @@ class PurchasedBooks extends Component {
     const { user: { userId } } = this.props
     const bookList = books ? books.filter(book => book.purchasedBy === userId) : 0
     const List = bookList.length ? (
-      bookList.map(book => {
+      bookList.reverse().map(book => {
         const bookLikes = book.likes ? `${book.likes.length} likes` : null
         const authorName = users[book.bookAuthor].userName
         return (
