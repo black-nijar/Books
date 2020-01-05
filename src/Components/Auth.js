@@ -44,7 +44,7 @@ class Auth extends Component {
     } else if (isSignedIn) {
       return (
         <div className='google-button'>
-          <button 
+          <button
             className='button-google'
             onClick={this.onSignOut}
           >
@@ -55,7 +55,7 @@ class Auth extends Component {
     } else {
       return (
         <div className='shadow-sm'>
-          <button 
+          <button
             className='button-google'
             onClick={this.onSignIn}
           >

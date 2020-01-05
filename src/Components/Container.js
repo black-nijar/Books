@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 
 const Container = (props) => {
-  const { user: { userId }} = props
+  const { user: { userId } } = props
   return (
     <div>
-     { userId ? <Navbar/>: null}
-     <br/>
-     <br/>
+      {userId ? <Navbar /> : null}
+      <br />
+      <br />
     </div>
   )
 }
@@ -17,4 +17,4 @@ const mapStateToProps = state => {
     user: state.auth
   }
 }
-export default  connect(mapStateToProps)(Container)
+export default connect(mapStateToProps)(Container)

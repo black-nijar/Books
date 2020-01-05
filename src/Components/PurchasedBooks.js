@@ -29,7 +29,7 @@ class PurchasedBooks extends Component {
       })
     ) : (
         <div>
-          No PurchasedBooks...
+         You have not purchased any book...
       </div>
       )
     return (

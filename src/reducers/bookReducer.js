@@ -1,4 +1,4 @@
-import { DATA, IMAGE_UPLOAD, IMAGE_URL, INPUT_NAME } from "../actions/types";
+import { DATA, IMAGE_UPLOAD, INPUT_NAME, HANDLE_PROGRESS } from "../actions/types";
 
 const initState = []
 
@@ -30,14 +30,17 @@ export const bookReducer = (state = initState, action) => {
         }
       }
     case IMAGE_UPLOAD:
-      const { image} = action
+      const { image } = action
       return {
         ...state,
-         'image': image
-         }
+        'image': image
+      }
 
     case INPUT_NAME:
       return { 'name': action.name }
+
+    case HANDLE_PROGRESS:
+      return { 'progress': action.progress }
 
     default:
       return state;

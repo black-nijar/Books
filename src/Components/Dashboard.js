@@ -7,14 +7,14 @@ class Dashboard extends Component {
       <div className='container'>
         <div className='home-page'>
           <h1>Welcome </h1>
-            <p>        
+          <p>
             Whether you're a teacher, photographer or hobbyist, share your expertise. Create & self publish your book today!
-            You can publish your books here !!!.To publish 
+            You can publish your books here !!!.To publish
             </p>
-            <div className='shadow-sm'>
-               <Auth/>
-            </div>
-         
+          <div className='shadow-sm'>
+            <Auth />
+          </div>
+
         </div>
       </div>
     )

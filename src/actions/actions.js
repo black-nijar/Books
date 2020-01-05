@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT, DATA, IMAGE_UPLOAD, INPUT_NAME } from './types';
+import { SIGN_IN, SIGN_OUT, DATA, IMAGE_UPLOAD, INPUT_NAME, HANDLE_PROGRESS } from './types';
 
 export const signIn = (id, name, image, emailId) => {
   return {
@@ -36,5 +36,11 @@ export const handleName = name => {
   return {
     type: INPUT_NAME,
     name
+  }
+}
+export const handleProgress = progress => {
+  return {
+    type: HANDLE_PROGRESS,
+    progress
   }
 }
