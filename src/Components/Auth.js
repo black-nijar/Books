@@ -20,10 +20,10 @@ class Auth extends Component {
   }
   onAuthChange = isSignedIn => {
     if (isSignedIn) {
-      const userId = this.auth.currentUser.Ab.w3.Eea
-      const userName = this.auth.currentUser.Ab.w3.ig
-      const image = this.auth.currentUser.Ab.w3.Paa
-      const userEmail = this.auth.currentUser.Ab.w3.U3
+      const userId = this.auth.currentUser.je.Qt.SU
+      const userName = this.auth.currentUser.je.Qt.Ad
+      const image = this.auth.currentUser.je.Qt.UK
+      const userEmail = this.auth.currentUser.je.Qt.zu
       this.props.signIn(userId, userName, image, userEmail)
       this.props.history.push('/books')
     } else {
