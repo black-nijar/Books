@@ -6,7 +6,7 @@ class Mycart extends Component {
   render() {
     return (
       <div className="container">
-        <div style={{marginTop: '35px'}}>
+        <div style={{marginTop: '70px'}}>
           <div className="accordion" id="accordion">
             <MyBooks />
             <PurchasedBooks />

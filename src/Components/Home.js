@@ -63,7 +63,7 @@ class Home extends Component {
     return (
       <div className="ui container">
         <h2 className="welcome">Welcome {this.props.user.userName}</h2>
-        <div className='card' style={{width: '400px'}}>
+        <div className='card' style={{width: '370px'}}>
           <form className="form" onSubmit={this.handleImageUpload}>
             <div className="book-names">
               <div>
