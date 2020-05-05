@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import Navbar from './Navbar';
 
 const Container = (props) => {
+  //console.log('PROPS :', props)
   const { user: { userId } } = props
   return (
     <div>
       {userId ? <Navbar /> : null}
-      <br />
-      <br />
     </div>
   )
 }

@@ -5,26 +5,31 @@ const initState = {
   userId: null,
   userName: null,
   userImage: null,
-  userEmail: null
-}
+  userEmail: null,
+};
 
 export const authReducer = (state = initState, action) => {
   switch (action.type) {
     case SIGN_IN:
-      const { id, name, image, emailId } = action.payload
+      const { id, name, image, emailId } = action.payload;
       return {
-       ...state,
+        ...state,
         isSignedIn: true,
         userId: id,
         userName: name,
         userImage: image,
-        userEmail: emailId
-      }
+        userEmail: emailId,
+      };
     case SIGN_OUT:
       return {
-        isSignedIn: false
-      }
+        ...state,
+        isSignedIn: false,
+        userId: null,
+        userName: null,
+        userImage: null,
+        userEmail: null,
+      };
     default:
       return state;
   }
-}
+};

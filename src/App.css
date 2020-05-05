@@ -22,7 +22,7 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px;
   grid-auto-rows: 150px;
-  grid-row-gap: 350px;
+  grid-row-gap: 380px;
   margin-bottom: 30rem;
   font-size: 15px;
 }
@@ -51,9 +51,9 @@
   margin-left: 60px;
 }
 .user-profile {
-  width: 460px;
+  width: 350px;
   margin: auto;
-  margin-top: 40px;
+  margin-top: 70px;
   border-block-end-color: aliceblue;
 }
 .google-button {
@@ -88,15 +88,26 @@
 .book-sell {
   margin-left: 40px;
 }
-.button-google {
-  border-radius: 5px;
-  border-color: cornflowerblue;
-  padding: 5px;
-}
 .home-page {
   margin: auto;
   text-align: center;
 }
 .publish-book {
+  text-align: center;
+}
+.landing {
+  position: relative;
+  background: url('./assets/sharon-mccutcheon-eMP4sYPJ9x0-unsplash.jpg') no-repeat center center/cover;
+  height: 100vh;
+}
+.landing-inner {
+  color: rgb(8, 96, 140);
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
 }
