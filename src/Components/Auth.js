@@ -25,8 +25,10 @@ class Auth extends Component {
       const userName = this.auth.currentUser.je.Pt.Ad;
       const image = this.auth.currentUser.je.Pt.QK;
       const userEmail = this.auth.currentUser.je.Pt.yu;
-      this.props.signIn(userId, userName, image, userEmail);
-      this.props.history.push("/books");
+      if (userId !== undefined && userName !== undefined && image !== undefined && userEmail !== undefined) {
+        this.props.signIn(userId, userName, image, userEmail);
+        this.props.history.push("/books");
+      }
     } else {
       this.props.signOut();
       this.props.history.push("/");
@@ -50,6 +52,7 @@ class Auth extends Component {
           style={{ color: "white", paddingLeft: "10px", cursor: "pointer" }}
           onClick={this.onSignOut}
         >
+        <i className='material-icons'>person_outline</i>
           Sign out
         </h6>
       );

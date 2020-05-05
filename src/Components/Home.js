@@ -63,46 +63,48 @@ class Home extends Component {
     return (
       <div className="ui container">
         <h2 className="welcome">Welcome {this.props.user.userName}</h2>
-        <form className="form" onSubmit={this.handleImageUpload}>
-          <div className="book-names">
-            <div>
-              <label htmlFor="book-name">Book name</label>
-              <input
-                className="form-control"
-                placeholder="Book name"
-                type="text"
-                ref={(input) => (this.book = input)}
-                required
-              />
+        <div className='card' style={{width: '400px'}}>
+          <form className="form" onSubmit={this.handleImageUpload}>
+            <div className="book-names">
+              <div>
+                <label htmlFor="book-name">Book name :</label>
+                <input
+                  className="form-control"
+                  placeholder="Book name"
+                  type="text"
+                  ref={(input) => (this.book = input)}
+                  required
+                />
+                <br />
+              </div>
+              <div>
+                <label htmlFor="book-image">Book image :</label>
+                <input
+                  className="form-control-file"
+                  type="file"
+                  onChange={this.handleImageChange}
+                />
+              </div>
               <br />
+              <div className="publish-book">
+                {progress ? (
+                  <div>
+                    <progress value={progress} max="100" />
+                    <br />
+                    please wait...
+                  </div>
+                ) : null}
+                <button
+                  disabled={!this.props.image ? true : false}
+                  type="submit"
+                  className="btn btn-primary"
+                >
+                  Publish
+                </button>
+              </div>
             </div>
-            <div>
-              <label htmlFor="book-image">Book image</label>
-              <input
-                className="form-control-file"
-                type="file"
-                onChange={this.handleImageChange}
-              />
-            </div>
-            <br />
-            <div className="publish-book">
-              {progress ? (
-                <div>
-                  <progress value={progress} max="100" />
-                  <br />
-                  please wait...
-                </div>
-              ) : null}
-              <button
-                disabled={!this.props.image ? true : false}
-                type="submit"
-                className="btn btn-primary"
-              >
-                Publish
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

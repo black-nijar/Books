@@ -30,9 +30,12 @@ class App extends Component {
     if (isSignedIn) {
       const userId = this.auth.currentUser.je.Pt.MU;
       const userName = this.auth.currentUser.je.Pt.Ad;
-      const image = this.auth.currentUser.je.Pt.UK;
-      const userEmail = this.auth.currentUser.je.Pt.zu;
-      this.props.signIn(userId, userName, image, userEmail);
+      const image = this.auth.currentUser.je.Pt.QK;
+      const userEmail = this.auth.currentUser.je.Pt.yu;
+      if (userId !== undefined && userName !== undefined && image !== undefined && userEmail !== undefined) {
+        this.props.signIn(userId, userName, image, userEmail);
+        //this.props.history.push("/books");
+      }
     }
   };
   render() {
