@@ -61,10 +61,10 @@ class Home extends Component {
   render() {
     const { progress } = this.props;
     return (
-      <div className="ui container">
-        <h2 className="welcome">Welcome {this.props.user.userName}</h2>
+      <div className="ui container" style={{marginTop: '100px'}}>
+        <h5 className="welcome">Welcome {this.props.user.userName}</h5>
         <div className='card' style={{width: '370px'}}>
-          <form className="form" onSubmit={this.handleImageUpload}>
+          <form className="form">
             <div className="book-names">
               <div>
                 <label htmlFor="book-name">Book name :</label>
@@ -98,6 +98,7 @@ class Home extends Component {
                   disabled={!this.props.image ? true : false}
                   type="submit"
                   className="btn btn-primary"
+                  onClick={() => this.handleImageUpload()}
                 >
                   Publish
                 </button>
