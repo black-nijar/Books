@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import { signIn } from "../actions/actions";
 import firebase from "firebase";
+import Navbar from "./Navbar";
 
 const PrivateRoute = ({ component: Component, auth, signIn, ...rest }) => {
   useEffect(() => {
@@ -12,13 +13,20 @@ const PrivateRoute = ({ component: Component, auth, signIn, ...rest }) => {
         signIn(res.uid, res.displayName, res.photoURL, res.email);
       }
     });
-  }, []);
+  }, [auth.isSignedIn]);
   console.log("atuh", auth);
   return (
     <Route
       {...rest}
       render={(props) =>
-        !auth.isSignedIn ? <Redirect to="/" /> : <Component {...props} />
+        !auth.isSignedIn ? (
+          <Redirect to="/" />
+        ) : (
+          <>
+            <Navbar />
+            <Component {...props} />
+          </>
+        )
       }
     />
   );

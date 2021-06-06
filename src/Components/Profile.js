@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import firebase from "firebase";
 
 class Profile extends Component {
   render() {
@@ -8,7 +9,7 @@ class Profile extends Component {
     } = this.props;
     return (
       <div className="container">
-        <div className="user-profile" >
+        <div className="user-profile">
           <div className="card">
             <h2 className="profile">Profile</h2>
             <hr />
@@ -23,6 +24,14 @@ class Profile extends Component {
                 </div>
                 <h6 className="user-name">Name : {userName}</h6>
                 <h6 className="user-email">Email ID : {userEmail}</h6>
+                <div
+                  className="shadow-sm text-center "
+                  onClick={() => {
+                    firebase.auth().signOut();
+                  }}
+                >
+                  <button className="btn btn-danger">Sign Out</button>
+                </div>
               </div>
             ) : (
               <div className="text-center">Sign In to see your profile</div>

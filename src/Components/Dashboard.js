@@ -1,14 +1,17 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import firebase from "firebase";
 import { connect } from "react-redux";
 import { signIn } from "../actions/actions";
+import DB_CONFIG from "./DBCONFIG";
 
-const Dashboard = ({ signIn, history }) => {
+const Dashboard = ({ signIn, history, auth }) => {
+  const [user, setUser] = useState(auth.isSignedIn);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((res) => {
       res ? login(res) : history.push("/");
     });
-  }, []);
+  }, [user]);
 
   const login = (res) => {
     signIn(res.uid, res.displayName, res.photoURL, res.email);
@@ -30,6 +33,13 @@ const Dashboard = ({ signIn, history }) => {
           res.user.photoURL,
           res.user.email
         );
+        const userDetail = {
+          userId: res.user.uid,
+          userEmail: res.user.email,
+          userName: res.user.displayName,
+          userImage: res.user.photoURL,
+        };
+        DB_CONFIG.child("users").child(userDetail.userId).set(userDetail);
         history.push("/books");
       })
       .catch((error) => {
@@ -66,4 +76,9 @@ const Dashboard = ({ signIn, history }) => {
   );
 };
 
-export default connect(null, { signIn })(Dashboard);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+export default connect(mapStateToProps, { signIn })(Dashboard);

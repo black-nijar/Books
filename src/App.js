@@ -14,20 +14,20 @@ import PrivateRoute from "./Components/PrivateRoute";
 import firebase from "firebase";
 
 const App = ({ history, signIn }) => {
-  useEffect(() => {
-    console.log("APP");
-    firebase.auth().onAuthStateChanged((res) => {
-      res ? login(res) : history.push("/");
-    });
-  }, []);
-  const login = (res) => {
-    console.log("LOgin", res);
-    signIn(res.uid, res.displayName, res.photoURL, res.email);
-    history.push("/books");
-  };
+  // useEffect(() => {
+  //   console.log("APP", history);
+  //   firebase.auth().onAuthStateChanged((res) => {
+  //     res ? login(res) : history.push("/");
+  //   });
+  // }, []);
+  // const login = (res) => {
+  //   console.log("LOgin", res);
+  //   signIn(res.uid, res.displayName, res.photoURL, res.email);
+  //   history.push("/books");
+  // };
   return (
     <BrowserRouter>
-      <Container />
+      {/* <Container /> */}
       <Switch>
         <Route path="/" exact component={Dashboard} />
         <PrivateRoute path="/books" component={Books} />
