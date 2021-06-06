@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Auth from "./Auth";
+// import Auth from "./Auth";
 
 class Navbar extends Component {
   render() {
@@ -8,7 +8,7 @@ class Navbar extends Component {
       <div className="ui navbar" style={{ marginBottom: "50px" }}>
         <nav className="navbar fixed-top navbar-dark bg-dark ">
           <div className="ui container">
-            <Link to="/" className="navbar-brand">
+            <Link to="/books" className="navbar-brand">
               <h6>Books</h6>
             </Link>
             <ul className="nav">
@@ -22,7 +22,7 @@ class Navbar extends Component {
                   <i className="material-icons">account_circle</i>Profile
                 </h6>
               </Link>
-              <Auth />
+              {/* <Auth /> */}
             </ul>
           </div>
         </nav>
